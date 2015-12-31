@@ -1,0 +1,21 @@
+<h1>Client List</h1>
+<table class="striped">
+	<tr>
+		<th>Name</th>
+		<th>Email</th>
+		<th>Sign Up</th>
+	</tr>
+	<% @clients.each do |c| %>
+		<tr>
+			<td><%= c.name %></td>
+			<td><%= c.email %></td>
+			<td><a href="/clients/<%= c.id %>"><button class="btn">Form</button></a></td>
+		</tr>
+	<% end %>
+</table>
+
+<% if @clients.count < 5 %>
+<a href="/clients/create" class="right">Create Demo Data</a>
+<% else %>
+<a href="/clients/destroy" class="right">Destroy Demo Data</a>
+<% end %>

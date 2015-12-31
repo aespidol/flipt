@@ -1,0 +1,35 @@
+<script type="text/javascript">
+	$(document).ready(function(){
+		$("#phone").hide()
+		$("#name").submit(function(){
+			var prospect_name = $("#prospect_name").val()
+			var client_id = $("#client_id").val()
+			console.log(client_id)
+
+			$("#name").hide()
+			$("#phone").show()
+
+			$.post("../prospects/create", {id: client_id, name: prospect_name}, function(data){
+				console.log(data)
+				var input = $("<input>").attr("type","hidden").attr("name","prospect_id").val(data);
+				$("#phone").append($(input));
+			})
+			return false;
+		})
+	})
+</script>
+
+<h1><%= @client.name %></h1>
+<form id="name">
+	<input type="hidden" value="<%= @client.id %>" id="client_id">
+	<label>Name: </label><input id="prospect_name" type="text" name="name">
+	<input class="btn" type="submit" value="Submit">
+</form>
+
+<form id="phone" action="/prospects" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<input type="hidden" name="_method" value="patch">
+	<label>Phone: </label><input id="phone" type="text" name="phone" placeholder="Enter Phone Number(Optional)">
+	<input class="btn" type="submit" value="Submit">
+	<a href="/clients">Skip</a>
+</form>
