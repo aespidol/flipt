@@ -10,6 +10,7 @@ class Client < ActiveRecord::Base
 		self.email.downcase!
 	end
 
+	# Create demo data
 	def self.create_demo
 		i = 1
 		j = rand(10)
